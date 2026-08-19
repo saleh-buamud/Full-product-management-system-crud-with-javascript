@@ -1,0 +1,575 @@
+/* =========================
+   Global
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #101418;
+    --surface: #171d23;
+    --surface-light: #1e262e;
+
+    --primary: #00bfa6;
+    --primary-dark: #009e8b;
+
+    --accent: #ffb703;
+    --danger: #ef476f;
+
+    --text: #f4f7f9;
+    --muted: #9ba7b3;
+
+    --border: rgba(255, 255, 255, 0.08);
+
+    --radius: 12px;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(0, 191, 166, 0.08),
+            transparent 35%),
+        radial-gradient(circle at bottom right,
+            rgba(255, 183, 3, 0.05),
+            transparent 35%),
+        var(--bg);
+
+    color: var(--text);
+
+    padding: 25px 20px;
+}
+
+
+/* =========================
+   Container
+========================= */
+
+.container {
+    width: min(1400px, 100%);
+    margin: auto;
+
+    animation: pageEnter 0.7s ease;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: clamp(35px, 5vw, 55px);
+    letter-spacing: 3px;
+
+    color: var(--text);
+
+    margin-bottom: 5px;
+
+    animation: titleAnimation 1s ease;
+}
+
+.header p {
+    color: var(--muted);
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   Form
+========================= */
+
+.product-form {
+    background: var(--surface);
+
+    padding: 25px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    animation: slideUp 0.8s ease;
+}
+
+
+/* =========================
+   Inputs
+========================= */
+
+input {
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: var(--surface-light);
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.count-input {
+    margin: 3px;
+}
+
+.category-input {
+    margin: 3px;
+}
+
+input::placeholder {
+    color: var(--muted);
+}
+
+input:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 191, 166, 0.12);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   Price Row
+========================= */
+
+.price-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(120px, 1fr)) minmax(130px, auto);
+
+    gap: 10px;
+
+    margin: 12px 0;
+}
+
+
+/* =========================
+   Total
+========================= */
+
+.total-box {
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 15px;
+
+    background: rgba(239, 71, 111, 0.12);
+
+    border: 1px solid rgba(239, 71, 111, 0.35);
+
+    border-radius: 9px;
+
+    color: var(--text);
+
+    white-space: nowrap;
+}
+
+.total-box span {
+    font-weight: bold;
+}
+
+.total-box strong {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+button {
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+/* Create */
+
+.primary-btn {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 12px;
+
+    border-radius: 9px;
+
+    background: var(--primary);
+
+    color: #071412;
+
+    box-shadow:
+        0 8px 20px rgba(0, 191, 166, 0.15);
+}
+
+.primary-btn:hover {
+    background: var(--primary-dark);
+
+    box-shadow:
+        0 10px 25px rgba(0, 191, 166, 0.25);
+}
+
+
+/* =========================
+   Search
+========================= */
+
+.search-section {
+    margin-top: 25px;
+
+    animation: slideUp 1s ease;
+}
+
+.search-section>input {
+    margin-bottom: 10px;
+}
+
+
+.search-buttons {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+.secondary-btn {
+    height: 50px;
+
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+}
+
+.secondary-btn:hover {
+    background: var(--surface-light);
+
+    border-color: var(--primary);
+
+    color: var(--primary);
+}
+
+
+/* =========================
+   Table
+========================= */
+
+.table-wrapper {
+    margin-top: 25px;
+
+    overflow-x: auto;
+
+    border-radius: var(--radius);
+
+    animation: tableEnter 1s ease;
+}
+
+
+/* Scrollbar */
+
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--surface);
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+
+table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+}
+
+
+/* =========================
+   Table Header
+========================= */
+
+thead {
+    background: var(--surface-light);
+}
+
+th {
+    padding: 18px 15px;
+
+    color: var(--primary);
+
+    font-size: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* =========================
+   Table Body
+========================= */
+
+td {
+    padding: 17px 15px;
+
+    text-align: center;
+
+    color: var(--text);
+
+    border-bottom: 1px solid var(--border);
+
+    white-space: nowrap;
+}
+
+tbody tr {
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+tbody tr:hover {
+    background: rgba(0, 191, 166, 0.06);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   Table Buttons
+========================= */
+
+.update-btn,
+.delete-btn {
+    padding: 9px 18px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+/* Update */
+
+.update-btn {
+    background: var(--primary);
+    color: #071412;
+}
+
+.update-btn:hover {
+    box-shadow:
+        0 6px 15px rgba(0, 191, 166, 0.25);
+}
+
+
+/* Delete */
+
+.delete-btn {
+    background: var(--danger);
+}
+
+.delete-btn:hover {
+    box-shadow:
+        0 6px 15px rgba(239, 71, 111, 0.25);
+}
+
+
+/* =========================
+   Empty Table
+========================= */
+
+#productsBody:empty::after {
+    content: "No products available";
+    padding: 20px;
+    margin: 10px;
+    color: var(--muted);
+    display: table-row;
+}
+
+
+/* =========================
+   Animations
+========================= */
+
+@keyframes pageEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes slideUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes tableEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes titleAnimation {
+
+    0% {
+        opacity: 0;
+        letter-spacing: 15px;
+    }
+
+    100% {
+        opacity: 1;
+        letter-spacing: 3px;
+    }
+
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+
+    .price-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .total-box {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    .product-form {
+        padding: 15px;
+    }
+
+    .price-row {
+        grid-template-columns: 1fr;
+    }
+
+    .total-box {
+        grid-column: auto;
+    }
+
+    .search-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+}

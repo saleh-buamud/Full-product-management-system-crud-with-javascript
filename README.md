@@ -8,7 +8,7 @@ CRUDS is a Product Management System interface built with HTML, CSS, and JavaScr
 
 | Function | Description | Status |
 |---|---|---|
-| Get Total | Calculates the final product total | 🚧 In Progress |
+| Get Total | Calculates the final product total | ✅ Completed |
 | Create Product | Creates a new product | 🚧 In Progress |
 | Save Data to Local Storage | Persists products in browser storage | 🚧 In Progress |
 | Clear Input Fields | Resets form fields after operations | 🚧 In Progress |
@@ -49,14 +49,13 @@ The following project foundations are currently available:
 - Product table structure
 - Search controls for title and category
 - Responsive styling and UI animations in `style.css`
+- Get Total calculation
 
-The requested JavaScript feature set is not yet completed because `main.js` currently contains placeholders rather than executable implementations.
 
 ### 🚧 To Do
 
 Future improvements for the JavaScript functionality include:
 
-- Implement Get Total
 - Implement Create Product
 - Implement Save Data to Local Storage
 - Implement Clear Input Fields
@@ -83,6 +82,7 @@ These are future improvements and are not completed features in the current repo
 - [ ] Update
 - [ ] Delete
 - [ ] Local Storage
+- [x] Get Total
 
 ### Phase 2 — Search & Data Handling
 
@@ -150,6 +150,6 @@ This flow describes the planned application architecture. The JavaScript steps a
 
 **Project Status: 🟢 Active Development**
 
-- **Completed features:** Product form and table structure, title/category search controls, responsive styling foundation, and UI animations.
-- **Current focus:** Implementing the JavaScript CRUD workflow and connecting the interface to product data.
-- **Next planned improvements:** Add Local Storage persistence, validation and cleaning, product totals, search behavior, edit/delete actions, and improved user feedback.
+- **Completed features:** Product form and table structure, title/category search controls, responsive styling foundation, UI animations, and Get Total calculation.
+- **Current focus:** Implementing the Create Product workflow.
+- **Next planned improvements:** Add Local Storage persistence, data validation and cleaning, Read, Delete, Edit/Update, Search, and improved user feedback.
