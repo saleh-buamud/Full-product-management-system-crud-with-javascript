@@ -252,6 +252,23 @@ button:active {
         0 8px 20px rgba(0, 191, 166, 0.15);
 }
 
+.primary-btn-delete {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 12px;
+
+    border-radius: 9px;
+
+    background: rgb(239, 71, 111);
+
+    color: #071412;
+
+    box-shadow:
+        0 8px 20px rgba(0, 191, 166, 0.15);
+}
+
 .primary-btn:hover {
     background: var(--primary-dark);
 
@@ -456,7 +473,7 @@ tbody tr:last-child td {
 ========================= */
 
 #productsBody:empty::after {
-    content: "No products available";
+    content: "";
     padding: 20px;
     margin: 10px;
     color: var(--muted);
@@ -572,4 +589,36 @@ tbody tr:last-child td {
         font-size: 14px;
     }
 
+}
+
+
+#productsBody button {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Update Button */
+#productsBody button {
+    background-color: #198754;
+}
+
+#productsBody button:hover {
+    background-color: #157347;
+    transform: translateY(-2px);
+}
+
+/* Delete Button */
+#productsBody button {
+    background-color: #dc3545;
+}
+
+#productsBody button:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-2px);
 }
