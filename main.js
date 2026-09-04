@@ -7,8 +7,78 @@ const total = document.getElementById("total");
 const count = document.getElementById("count");
 const category = document.getElementById("category");
 const submit = document.getElementById("submit");
-let Products = JSON.parse(localStorage.getItem("Products")) || [];
-displayProducts();
+let Products = JSON.parse(localStorage.getItem("Products")) || [
+    {
+        title: "laptop",
+        price: 1500,
+        taxes: 100,
+        ads: 50,
+        discount: 100,
+        total: 1550,
+        category: "electronics",
+        count: 1
+    },
+    {
+        title: "keyboard",
+        price: 200,
+        taxes: 20,
+        ads: 10,
+        discount: 0,
+        total: 230,
+        category: "electronics",
+        count: 1
+    },
+    {
+        title: "mouse",
+        price: 100,
+        taxes: 10,
+        ads: 5,
+        discount: 0,
+        total: 115,
+        category: "electronics",
+        count: 1
+    },
+    {
+        title: "iphone",
+        price: 1200,
+        taxes: 50,
+        ads: 20,
+        discount: 30,
+        total: 1240,
+        category: "phones",
+        count: 1
+    },
+    {
+        title: "samsung",
+        price: 1000,
+        taxes: 40,
+        ads: 20,
+        discount: 20,
+        total: 1040,
+        category: "phones",
+        count: 1
+    },
+    {
+        title: "office chair",
+        price: 300,
+        taxes: 20,
+        ads: 10,
+        discount: 0,
+        total: 330,
+        category: "furniture",
+        count: 1
+    },
+    {
+        title: "table",
+        price: 500,
+        taxes: 30,
+        ads: 20,
+        discount: 10,
+        total: 540,
+        category: "furniture",
+        count: 1
+    }
+]; displayProducts();
 let editMode = false;
 // Get total
 function getTotal() {
@@ -59,7 +129,7 @@ document.getElementById("submitBtn").addEventListener("click", function (e) {
 });
 
 // Validate Product
-function validateProduct() {
+function validateProduct(isUpdate = false) {
 
     if (title.value.trim() === "") {
         alert("Title is required");
@@ -76,10 +146,10 @@ function validateProduct() {
         return false;
     }
 
-    // if (count.value === "" || Number(count.value) <= 0) {
-    //     alert("Count must be greater than 0");
-    //     return false;
-    // }
+    if (!isUpdate && (count.value === "" || Number(count.value) <= 0)) {
+        alert("Count must be greater than 0");
+        return false;
+    }
 
     return true;
 }
@@ -89,13 +159,20 @@ function createProduct() {
         return;
     }
     const newProduct = {
-        title: title.value,
+        title: title.value.trim().toLowerCase(),
+
         price: Number(price.value),
+
         taxes: Number(taxes.value),
+
         ads: Number(ads.value),
+
         discount: Number(discount.value),
+
         total: Number(total.innerHTML),
-        category: category.value,
+
+        category: category.value.trim().toLowerCase(),
+
         count: Number(count.value)
     };
     if (newProduct.count > 1) {
@@ -105,7 +182,7 @@ function createProduct() {
     } else {
         Products.push(newProduct);
     }
-    Products.push(newProduct);
+
     localStorage.setItem("Products", JSON.stringify(Products));
     displayProducts();
     clearInputs();
@@ -202,7 +279,7 @@ function updateData(i) {
 
 
 function updateProduct(id) {
-    if (!validateProduct()) {
+    if (!validateProduct(true)) {
         return;
     }
     scrolPage();
@@ -220,6 +297,7 @@ function updateProduct(id) {
     displayProducts();
     clearInputs();
     editMode = false;
+    count.style.display = "block";
     document.getElementById("submitBtn").innerHTML = "Create Product";
 
 }
@@ -241,9 +319,104 @@ document.getElementById("deleteAllBtn").addEventListener("click", function () {
 
 });
 // Search
-// Clean data
 
 
+function searchProductByTitle() {
+    let tr = document.getElementById("productsBody");
+    let searchValue = document.getElementById("search").value.trim().toLowerCase();
+
+    tr.innerHTML = "";
+
+    let found = false;
+
+    for (let i = 0; i < Products.length; i++) {
+
+        if (Products[i].title.toLowerCase().includes(searchValue)) {
+
+            found = true;
+
+            tr.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${Products[i].title}</td>
+                    <td>${Products[i].price}</td>
+                    <td>${Products[i].taxes}</td>
+                    <td>${Products[i].ads}</td>
+                    <td>${Products[i].discount}</td>
+                    <td>${Products[i].total}</td>
+                    <td>${Products[i].category}</td>
+                    <td>
+                        <button onclick="updateData(${i})">Update</button>
+                    </td>
+                    <td>
+                        <button onclick="deleteData(${i})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    if (!found) {
+        tr.innerHTML = `
+            <tr>
+                <td colspan="10">
+                    No product found with the given title.
+                </td>
+            </tr>
+        `;
+    }
+
+    document.getElementById("search").value = "";
+}
+
+function searchProductByCategory() {
+    let tr = document.getElementById("productsBody");
+    let searchValue = document.getElementById("search").value.trim().toLowerCase();
+    tr.innerHTML = "";
+
+    let found = false;
+
+    for (let i = 0; i < Products.length; i++) {
+
+        if (Products[i].category.toLowerCase().includes(searchValue)) {
+
+            found = true;
+
+            tr.innerHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${Products[i].title}</td>
+                    <td>${Products[i].price}</td>
+                    <td>${Products[i].taxes}</td>
+                    <td>${Products[i].ads}</td>
+                    <td>${Products[i].discount}</td>
+                    <td>${Products[i].total}</td>
+                    <td>${Products[i].category}</td>
+                    <td>
+                        <button onclick="updateData(${i})">Update</button>
+                    </td>
+                    <td>
+                        <button onclick="deleteData(${i})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    if (!found) {
+        tr.innerHTML = `
+            <tr>
+                <td colspan="10">
+                    No product found with the given category.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+
+// Scroll to top
 function scrolPage() {
     window.scrollTo({
         top: 0,
